@@ -1,13 +1,16 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.Date;
 import java.util.regex.Pattern;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class RecurringAccount implements Account{
     private String type;
     private int depositPeriod;
 
-    private Date depositDate;
+    private LocalDate depositDate;
 
     RecurringAccount(){
         this.type="Recurring Account";
@@ -31,12 +34,12 @@ public class RecurringAccount implements Account{
     public void deposit(Customer customer){}
     public void deposit(Customer customer,int firstTransaction) {
         if (firstTransaction == 1) {
-            this.depositDate = new Date();
+            this.depositDate = LocalDate.now();
             Scanner input = new Scanner(System.in);
             System.out.println("\nhow much you want to deposit");
             try {
                 double deposit = input.nextDouble();
-                while (deposit <= 0) {
+                while (deposit <= 0  && deposit < customer.getAccountBalance()) {
                     System.out.println("Enter proper amount.");
                     deposit = input.nextDouble();
                 }
@@ -45,10 +48,8 @@ public class RecurringAccount implements Account{
                 System.out.println("Invalid input");
             }
         } else {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
-            Date currentDate = new Date();
             Scanner input = new Scanner(System.in);
-            if (simpleDateFormat.format(currentDate).equals(simpleDateFormat.format(this.depositDate))) {
+            if (DAYS.between(depositDate,LocalDate.now())<=30){
                 System.out.println("Deposit the amount after a month");
             } else {
                 System.out.println("How much you want to deposit?");

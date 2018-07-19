@@ -33,7 +33,7 @@ public class SavingsAccount implements Account{
         System.out.println("\nhow much you want to deposit");
         try {
             double deposit = input.nextDouble();
-            while (deposit <= 0) {
+            while (deposit <= 0  && deposit < customer.getAccountBalance()) {
                 System.out.println("Enter proper amount.");
                 deposit = input.nextDouble();
             }

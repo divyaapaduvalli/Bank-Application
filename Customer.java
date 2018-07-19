@@ -6,7 +6,7 @@ public class Customer {
     private String accountHolderFirstName;
     private String accountHolderMiddleName;
     private String accountHolderLastName;
-    private String accountHolderAge;
+    private int accountHolderAge;
     private Date accountHolderDob;
     private String accountHolderNumber;
     private String accountHolderStreet;
@@ -21,9 +21,8 @@ public class Customer {
     private double accountBalance;
     private int accountPin;
 
-    Customer(Account accountType){
-        this.accountType=accountType;
-    }
+    Customer(Account accountType,int accountNumber,int accountPin){
+        this.accountType=accountType; this.accountNumber=accountNumber; this.accountPin=accountPin;}
     public void setAccountHolderFirstName(String accountHolderFirstName){
         this.accountHolderFirstName=accountHolderFirstName;
     }
@@ -68,7 +67,7 @@ public class Customer {
 
     public void setAccountHolderEmailId(String accountHolderEmailId){ this.accountHolderEmailId=accountHolderEmailId; }
 
-    public void setAccountHolderAge(String accountHolderAge){this.accountHolderAge=accountHolderAge;}
+    public void setAccountHolderAge(int accountHolderAge){this.accountHolderAge=accountHolderAge;}
 
     public void setAccountHolderDob(Date accountHolderDob){this.accountHolderDob=accountHolderDob;}
 
@@ -100,7 +99,7 @@ public class Customer {
         return this.accountHolderLastName;
     }
 
-    public String getAccountHolderAge(){return this.accountHolderAge;}
+    public int getAccountHolderAge(){return this.accountHolderAge;}
 
     public Date getAccountHolderDob(){return this.accountHolderDob;}
 
