@@ -1,8 +1,8 @@
+package userDefined;
 import java.util.*;
 
 public class BankMain{
     public static void main(String[] args) {
-        //ArrayList<Customer> customer=new ArrayList<Customer>();
         HashMap<Integer, Integer> buffer = new HashMap<Integer, Integer>();
         int randomNumber, randomPin = 0;
         HashMap<Integer,Customer> customer= new HashMap<Integer,Customer>();
@@ -13,6 +13,7 @@ public class BankMain{
         Scanner input = new Scanner(System.in);
         int firstTransaction=0;
         int choice;
+        boolean temp=true;
 
        do {
             System.out.println("\nType\n1. To create account\n2. To carry out a transaction \n3. To close an account\n4. To exit\n");
@@ -64,29 +65,32 @@ public class BankMain{
                                 System.out.println("Enter correct pin number");
                                 pin = bank.customerPin();
                             }
-                            System.out.println("Choose one of the following activity :");
-                            System.out.println("1. Deposit | 2. Withdrawal | 3. Balance | 4. Exit");
-                            choice = input.nextInt();
+                            while(temp) {
+                                System.out.println("\nChoose one of the following activity :");
+                                System.out.println("1. Deposit | 2. Withdrawal | 3. Balance | 4. Exit");
+                                choice = input.nextInt();
 
-                            switch (choice) {
-                                case 1:
-                                    firstTransaction = 2;
-                                    customer.get(number).getAccountType().deposit(customer.get(number), firstTransaction);
-                                    System.out.println("Your balance " + customer.get(number).getAccountBalance());/*out side the switch*/
-                                    break;
-                                case 2:
-                                    customer.get(number).getAccountType().withdraw(customer.get(number));
-                                    System.out.println("Your balance " + customer.get(number).getAccountBalance());
-                                    break;
-                                case 3:
-                                    System.out.println("Your balance " + customer.get(number).getAccountBalance());
-                                    break;
-                                case 4:
-                                    break;
+                                switch (choice) {
+                                    case 1:
+                                        firstTransaction = 2;
+                                        customer.get(number).getAccountType().deposit(customer.get(number), firstTransaction);
+                                        System.out.println("Your balance " + customer.get(number).getAccountBalance());
+                                        break;
+                                    case 2:
+                                        customer.get(number).getAccountType().withdraw(customer.get(number));
+                                        System.out.println("Your balance " + customer.get(number).getAccountBalance());
+                                        break;
+                                    case 3:
+                                        System.out.println("Your balance " + customer.get(number).getAccountBalance());
+                                        break;
+                                    case 4:
+                                        temp=false;
+                                        break;
+                                }
                             }
                         }
                         else{
-                            System.out.println("Account not found. Create an account first!");
+                            System.out.println("Create an account first!");
                         }
                         break;
                     case 3:
@@ -124,6 +128,6 @@ public class BankMain{
                 System.out.println("enter proper choice");
             }
         }while(true);
-
     }
+
 }

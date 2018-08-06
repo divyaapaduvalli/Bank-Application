@@ -1,13 +1,21 @@
+package userDefined;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class FixedAccount implements Account{
     private String type;
     private int depositPeriod;
-    FixedAccount(){
-        this.type="Fixed Account";
+
+    private LocalDate depositDate;
+
+    public FixedAccount(){
+        this.type="Recurring Account";
     }
     public String getType(){return type;}
+
     public void withdraw(Customer customer){System.out.println("You cannot withdraw!");}
     public void interest(Customer customer){
         customer.setAccountBalance(customer.getAccountBalance() + (customer.getAccountBalance() * (6 / 100)));
@@ -24,24 +32,22 @@ public class FixedAccount implements Account{
     }
     public void deposit(Customer customer){}
     public void deposit(Customer customer,int firstTransaction) {
-        if(firstTransaction==1)
-        {
+        if (firstTransaction == 1) {
+            this.depositDate = LocalDate.now();
             Scanner input = new Scanner(System.in);
             System.out.println("\nhow much you want to deposit");
             try {
                 double deposit = input.nextDouble();
-                while (deposit <= 0  && deposit <customer.getAccountBalance()) {
+                while (deposit <= 0  || deposit>100000) {
                     System.out.println("Enter proper amount.");
                     deposit = input.nextDouble();
                 }
                 customer.setAccountBalance(customer.getAccountBalance() + deposit);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Invalid input");
             }
-        }
-        else {
-            System.out.println("Cannot Deposit");
+        } else {
+            System.out.println("Cannot deposit!");
+            }
         }
     }
-}

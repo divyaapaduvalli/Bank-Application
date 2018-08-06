@@ -1,3 +1,4 @@
+package userDefined;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -5,14 +6,13 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-
 public class RecurringAccount implements Account{
     private String type;
     private int depositPeriod;
 
     private LocalDate depositDate;
 
-    RecurringAccount(){
+    public RecurringAccount(){
         this.type="Recurring Account";
     }
     public String getType(){return type;}
@@ -39,7 +39,7 @@ public class RecurringAccount implements Account{
             System.out.println("\nhow much you want to deposit");
             try {
                 double deposit = input.nextDouble();
-                while (deposit <= 0  && deposit < customer.getAccountBalance()) {
+                while (deposit <= 0 || deposit < customer.getAccountBalance() || deposit>100000) {
                     System.out.println("Enter proper amount.");
                     deposit = input.nextDouble();
                 }
@@ -54,9 +54,14 @@ public class RecurringAccount implements Account{
             } else {
                 System.out.println("How much you want to deposit?");
                 try {
-                    customer.setAccountBalance(customer.getAccountBalance() + input.nextDouble());
+                    double deposit = input.nextDouble();
+                    while (deposit <= 0 || deposit>=100000) {
+                        System.out.println("Enter proper amount.");
+                        deposit = input.nextDouble();
+                    }
+                    customer.setAccountBalance(customer.getAccountBalance() + deposit);
                 } catch (Exception e) {
-                    System.out.println("invalid input");
+                    System.out.println("Invalid input");
                 }
             }
         }

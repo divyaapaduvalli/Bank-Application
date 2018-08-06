@@ -1,4 +1,5 @@
-interface Account {
+package userDefined;
+public interface Account {
     String type="";
     String getType();
     void withdraw(Customer customer);

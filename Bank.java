@@ -1,3 +1,4 @@
+package userDefined;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,18 +46,21 @@ public class Bank{
         SimpleDateFormat dateFormatOne= new SimpleDateFormat("yyyy");
         int age;
         do {
-            System.out.println("Your DOB in dd/MM/yyyy format: ");
-            String dob = in.nextLine();
-            while (!Pattern.matches("^([1-9]|0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", dob)) {
-                System.out.println("Nope! Enter proper date");
-                dob = in.nextLine();
-            }
-            try {
-                dateOne = dateFormat.parse(dob);
-            } catch (ParseException e) {
-                System.out.println("invalid date");
-            }
-            age = Integer.parseInt(dateFormatOne.format(date)) - Integer.parseInt(dateFormatOne.format(dateOne));
+            //try {
+                System.out.println("Your DOB in dd/MM/yyyy format: ");
+                String dob = in.nextLine();
+                while (!Pattern.matches("^([1-9]|0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\\d\\d$", dob)) {
+                    System.out.println("Nope! Enter proper date");
+                    dob = in.nextLine();
+                }
+                try {
+                    dateOne = dateFormat.parse(dob);
+                } catch (ParseException e) {
+                    System.out.println("invalid date");
+                }
+                age = Integer.parseInt(dateFormatOne.format(date)) - Integer.parseInt(dateFormatOne.format(dateOne));
+          //  }
+            //catch()
         }while(age<=0);
         customer.setAccountHolderDob(dateOne);
         customer.setAccountHolderAge(age);
@@ -105,13 +109,21 @@ public class Bank{
 
     public void customerInformation(Customer customer){
         System.out.println("Your account details : ");
-        System.out.println("Your account type is: " + customer.getAccountType().getType());
+        System.out.println("Your Name : "+customer.getAccountHolderFirstName()+" "+customer.getAccountHolderMiddleName()+" "+customer.getAccountHolderLastName());
+        System.out.println("Your Age : "+customer.getAccountHolderAge());
+        System.out.println("Your Date of Birth : "+customer.getAccountHolderDob());
+        System.out.println("Your Phone Number : "+customer.getAccountHolderNumber());
+        System.out.println("Your Address : "+customer.getAccountHolderStreet()+" "+customer.getAccountHolderArea()+" "+customer.getAccountHolderCity()+" "+customer.getAccountHolderState()+" "+customer.getAccountHolderPin());
+        System.out.println("Your Email ID : "+customer.getAccountHolderEmailId());
+        System.out.println("Your Adhaar Number : "+customer.getAccountHolderAdhaarNumber());
+        System.out.println("\nNote down the following details : ");
+        System.out.println("\nYour account type is: " + customer.getAccountType().getType());
         System.out.println("Note down your account number : " + customer.getAccountNumber());
         System.out.println("Note down your account pin : " + customer.getAccountPin());
         System.out.println("Your current account balance is : " + customer.getAccountBalance());
     }
 
-        public String customerNumber() {
+    public String customerNumber() {
 
             System.out.println("Your Account Number:");
             Scanner inputOne = new Scanner(System.in);
@@ -122,7 +134,7 @@ public class Bank{
             }
             return number;
         }
-        public String customerPin(){
+    public String customerPin(){
             System.out.println("Your Account Pin:");
             Scanner inputOne = new Scanner(System.in);
             String pin = inputOne.nextLine();
